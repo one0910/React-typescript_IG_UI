@@ -4,3 +4,4 @@ package-lock.json
 .vscode/
 vscode-profile-2021-09-16-20-44-49.heapsnapshot
 .DS_Store
+/._.DS_Store

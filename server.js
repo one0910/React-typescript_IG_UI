@@ -20,10 +20,11 @@ var fireData = admin.database();
 // console.log(fireData);
 
 app.engine('ejs',engine);
-app.set('views','./views');
-app.set('view engine','ejs');
+// app.set('views','./views');
+// app.set('view engine','ejs');
 //增加靜態檔案的路徑
-app.use(express.static('public'))
+app.use(express.static(__dirname +'/frontend'))
+// app.use(express.static('build'))
 
 // 增加 body 解析
 app.use(bodyParser.json());
@@ -39,8 +40,22 @@ app.get('/petlist',function (req,res) {
    fireData.ref('petData').once("value",(snapshot)=>{
      res.send(snapshot.val())
    })
- })
+})
+
+app.get('/posts',function (req,res) {
+  // res.header("Access-Control-Allow-Origin","*")
+  fireData.ref('IGposts').once("value",(snapshot)=>{
+    res.send(snapshot.val())
+  })
+})
+
+app.get('/stories',function (req,res) {
+  // res.header("Access-Control-Allow-Origin","*")
+  fireData.ref('IGstories').once("value",(snapshot)=>{
+    res.send(snapshot.val())
+  })
+})
 
 // 監聽 port
-var port = process.env.PORT || 8081;
+var port = process.env.PORT || 8080;
 app.listen(port);
